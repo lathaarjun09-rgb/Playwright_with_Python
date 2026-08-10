@@ -7,7 +7,7 @@ def test_static_web_table():
         page = browser.new_page()
 
         page.goto("https://testautomationpractice.blogspot.com/")
-        # page.wait_for_timeout(3000)
+        page.wait_for_timeout(3000)
         # Wait until the page loads
         page.wait_for_load_state("networkidle")
         table = page.locator("//table[@name='BookTable']")
@@ -16,8 +16,8 @@ def test_static_web_table():
         #How many rows in the table
 
         # #Locate the all the rows
-        # rows = table.locator("tbody tr")
-        # print(rows)
+        rows = table.locator("tbody tr")
+        print(rows)
 
         #table,tbody:Contentent in the table,
         #tr:Rows in the table,th:Headers in the table,td:Data in the table
@@ -52,3 +52,47 @@ def test_static_web_table():
             for j in range(column_count):
                 print(column.nth(j).inner_text(), end = "|")
             print()
+
+        print("\nSecond Row\n")
+        second_row = rows.nth(1).locator("td")
+
+        for i in range(column_count):
+            print(second_row.nth(i).inner_text(),end = '|')
+        print()    
+
+        print("\nBook Names\n")
+        
+        for i in range(row_count):
+            book = rows.nth(i).locator("td").nth(0).inner_text()
+            print(book) 
+
+        # Get the Specific cell value
+
+        cell_value = rows.nth(1).locator("td").nth(1).inner_text()
+        print(cell_value)  
+
+        #Search Book Learn Selenium
+
+        found = False
+        for i in range(row_count):
+            book = rows.nth(i).locator("td").nth(0).inner_text()
+            if book == "Learn Selenium":
+                print("Found the eaxct book name")
+                found = True
+                break
+
+        if not found:
+            print("Book not found")      
+
+        found = False
+        for i in range(row_count):
+            book = rows.nth(i).locator("td").nth(2).inner_text()
+            if book == "Learn JS":
+                print("Found the eaxct book name")
+                found = True
+                break
+            else:
+                print("Book Not Found") 
+                
+                   
+        
