@@ -41,7 +41,7 @@ def test_hidden_dropdown():
         
         print("Navigating to Admin Module...")
         page.get_by_role("link", name="Admin").click()
-
+        #Opening the bootstarp dropdown
         print("Opening User Role Bootstrap Dropdown...")
         page.locator(".oxd-select-text").first.click()
 

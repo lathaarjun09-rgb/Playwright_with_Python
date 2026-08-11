@@ -72,3 +72,102 @@ def test_static_web_table():
 #Network speed of Chrome process: 6.0 Mbps
 
 #Disk space of Firefox process: 0.30 MB/s        
+
+        
+        firefox_row = rows.filter(has_text="Firefox").first
+
+        # Verify Firefox row exists
+        assert firefox_row.count() > 0
+
+        print("Firefox Row Found")
+
+        #Find Memory column
+        
+        memory_column_index = -1
+
+        for i in range(column_count):
+
+           
+            header_name = (headers.nth(i).inner_text().strip())
+
+            
+            if header_name == "Memory (MB)":
+
+                memory_column_index = i
+                break
+
+        assert memory_column_index != -1
+        # Get Firefox Memory
+        firefox_cells = firefox_row.locator("td")
+
+       
+        firefox_memory = (firefox_cells.nth(memory_column_index).inner_text())
+
+        print("Firefox Memory :",firefox_memory)
+
+        # GET NETWORK OF CHROME
+        print("NETWORK OF CHROME")
+        # Chrome row already identified
+        print("Chrome Row Found")
+        #Find Network column
+        network_column_index = -1
+
+        for i in range(column_count):
+            header_name = (headers.nth(i).inner_text().strip())
+
+            # Check Network header
+            if header_name == "Network (Mbps)":
+
+                network_column_index = i
+
+                break
+        assert network_column_index != -1
+
+        # Get Chrome Network
+        chrome_cells = chrome_row.locator("td")
+
+       
+        chrome_network = (chrome_cells.nth(network_column_index).inner_text())
+
+        print("Chrome Network :",chrome_network)
+        # GET DISK OF FIREFOX
+        # ======================================================
+
+        # Firefox row already identified
+        # ------------------------------------------------------
+
+        print("Firefox Row Found")
+        # Find Disk column
+
+        disk_column_index = -1
+
+        # Loop through headers
+        for i in range(column_count):
+
+            # Read header text
+            header_name = (headers.nth(i).inner_text().strip())
+           
+            if header_name == "Disk (MB/s)":
+
+                disk_column_index = i
+
+                break
+
+        assert disk_column_index != -1
+       
+
+        firefox_cells = firefox_row.locator("td")
+
+        firefox_disk = (firefox_cells.nth(disk_column_index).inner_text())
+
+        print("Firefox Disk :", firefox_disk)
+
+        
+        print("1. Chrome CPU :",chrome_cpu)
+
+        print("2. Firefox Memory  :",firefox_memory)
+
+        print("3. Chrome Network  :",chrome_network)
+
+        print("4. Firefox Disk    :",firefox_disk)
+        
