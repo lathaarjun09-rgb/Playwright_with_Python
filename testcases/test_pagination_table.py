@@ -123,61 +123,63 @@ def test_static_web_table():
               pagination_c.nth(page_no).click()
               page.wait_for_timeout(1000)
 
-    table = page.locator("#productTable")
-            print("\n Pagination Web table\n", table)
+        table = page.locator("#productTable")
+        print("\n Pagination Web table\n", table)
     
-            rows = table.locator("tbody tr")
-            row_count = rows.count()
-            print("\n Total no.of Rows:", row_count)
+        rows = table.locator("tbody tr")
+        row_count = rows.count()
+        print("\n Total no.of Rows:", row_count)
     
-            #Navigation,data in the current page, selecting the check boxes, Serch the product among the pages
+        #Navigation,data in the current page, selecting the check boxes, Serch the product among the pages
     
-            headers = table.locator("thead th")
-            column_count = headers.count()
-            print("\n Total no.of.columns:",column_count)
+        headers = table.locator("thead th")
+        column_count = headers.count()
+        print("\n Total no.of.columns:",column_count)
     
-            #Current Page
-            for i in range(row_count):
-                row = rows.nth(i)
-                cells = row.locator("td")
-                for j in range(cells.count()):
-                    print(cells.nth(j).inner_text(),end="|")
+        #Current Page
+        for i in range(row_count):
+            row = rows.nth(i)
+            cells = row.locator("td")
+            for j in range(cells.count()):
+                print(cells.nth(j).inner_text(),end="|")
             print()     
     
             #Product names
-            for i in range(row_count): # 1,2,3,4,5
-                product = rows.nth(i).locator("td").nth(1).inner_text()
+        for i in range(row_count): # 1,2,3,4,5
+            product = rows.nth(i).locator("td").nth(1).inner_text()
+            print(product)
+    
+        search_product = "Smartwatch"
+        print(f"\n Search for the item:",{search_product})
+        found = False 
+    
+        search_products = "	Tablet"
+        print(f"\n Search for the item:",{search_products})
+        found = False 
+    
+        for i in range(row_count):
+            product = (rows.nth(i).locator("td").nth(1).inner_text())
+    
+            if product == search_product:
+                print("product found")
+    
+                found = True
+                break
+            elif product == search_products:
                 print(product)
-    
-            search_product = "Smartwatch"
-            print(f"\n Search for the item:",{search_product})
-            found = False 
-    
-            search_products = "	Tablet"
-            print(f"\n Search for the item:",{search_products})
-            found = False 
-    
-            for i in range(row_count):
-                product = (rows.nth(i).locator("td").nth(1).inner_text())
-    
-                if product == search_product:
-                    print("product found")
-    
-                    found = True
-                    break
-                elif product == search_products:
-                    print(product)
     # Newly added code
-    pagination_links = pagination.locator("li a")
-        page_count = pagination_links.count()
+        
+        pagination_c = pagination_no.locator("li a")
+        
+        page_count = pagination_c.count()
         print("Total Pagination Links :", page_count)
 
         print("\nPagination Numbers")
         for i in range(page_count):
-            print(pagination_links.nth(i).inner_text())
+            print(pagination_c.nth(i).inner_text())
 
         print("\nOpening Page 2")
-        pagination_links.nth(1).click()
+        pagination_c.nth(1).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -191,17 +193,17 @@ def test_static_web_table():
         print(f"\nSearching {search_product} Across Pages")
         found = False
 
-        pagination_links = pagination.locator("li a")
-        pagination_links.nth(0).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(0).click()
         page.wait_for_timeout(500)
 
-        pagination_links = pagination.locator("li a")
-        total_pages = pagination_links.count()
+        pagination_c = pagination_no.locator("li a")
+        total_pages = pagination_c.count()
         print("Total Pages :", total_pages)
 
         for page_number in range(total_pages):
-            pagination_links = pagination.locator("li a")
-            pagination_links.nth(page_number).click()
+            pagination_c = pagination_no.locator("li a")
+            pagination_c.nth(page_number).click()
             page.wait_for_timeout(300)
 
             rows = table.locator("tbody tr")
@@ -234,8 +236,8 @@ def test_static_web_table():
                 print("Laptop Checkbox Selected")
                 break   
         print("\nOpening Page 2")
-        pagination_links = pagination.locator("li a")
-        pagination_links.nth(1).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(1).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -246,8 +248,8 @@ def test_static_web_table():
             print(rows.nth(i).inner_text())
 
         print("\nOpening Page 3")
-        pagination_links = pagination.locator("li a")
-        pagination_links.nth(2).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(2).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -258,8 +260,8 @@ def test_static_web_table():
             print(rows.nth(i).inner_text())
 
         print("\nOpening Page 4")
-        pagination_links = pagination.locator("li a")
-        pagination_links.nth(3).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(3).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -271,7 +273,8 @@ def test_static_web_table():
 
         print("\nSelecting First Product from Page 3")
 
-        pagination.locator("li a").nth(2).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(2).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -287,7 +290,8 @@ def test_static_web_table():
 
         print("\nSelecting First Product from Page 4")
 
-        pagination.locator("li a").nth(3).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(3).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -301,7 +305,8 @@ def test_static_web_table():
 
         print(product, "Selected from Page 4")
 
-        pagination.locator("li a").nth(2).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(2).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
@@ -316,7 +321,8 @@ def test_static_web_table():
         else:
             print(product_name, "Not Found on Page 3")
 
-        pagination.locator("li a").nth(3).click()
+        pagination_c = pagination_no.locator("li a")
+        pagination_c.nth(3).click()
         page.wait_for_timeout(500)
 
         rows = table.locator("tbody tr")
