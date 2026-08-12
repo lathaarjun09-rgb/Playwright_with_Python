@@ -167,5 +167,167 @@ def test_static_web_table():
                     break
                 elif product == search_products:
                     print(product)
-            
+    # Newly added code
+    pagination_links = pagination.locator("li a")
+        page_count = pagination_links.count()
+        print("Total Pagination Links :", page_count)
+
+        print("\nPagination Numbers")
+        for i in range(page_count):
+            print(pagination_links.nth(i).inner_text())
+
+        print("\nOpening Page 2")
+        pagination_links.nth(1).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+        print("Rows on Page 2 :", rows.count())
+
+        print("\nPage 2 Data")
+        for i in range(rows.count()):
+            print(rows.nth(i).inner_text())
+
+        search_product = "Laptop"
+        print(f"\nSearching {search_product} Across Pages")
+        found = False
+
+        pagination_links = pagination.locator("li a")
+        pagination_links.nth(0).click()
+        page.wait_for_timeout(500)
+
+        pagination_links = pagination.locator("li a")
+        total_pages = pagination_links.count()
+        print("Total Pages :", total_pages)
+
+        for page_number in range(total_pages):
+            pagination_links = pagination.locator("li a")
+            pagination_links.nth(page_number).click()
+            page.wait_for_timeout(300)
+
+            rows = table.locator("tbody tr")
+
+            for i in range(rows.count()):
+                product = rows.nth(i).locator("td").nth(1).inner_text()
+
+                if product == search_product:
+                    print(f"{search_product} Found on Page {page_number + 1}")
+                    found = True
+                    break
+
+            if found:
+                break
+
+        assert found, f"{search_product} was not found in any page"
+        print("\nProduct Search Successful")
+
+        print("\nSelecting Laptop Checkbox")
+
+        rows = table.locator("tbody tr")
+
+        for i in range(rows.count()):
+            row = rows.nth(i)
+            product = row.locator("td").nth(1).inner_text()
+
+            if product == "Laptop":
+                checkbox = row.locator("td").nth(3).locator("input")
+                checkbox.check()
+                print("Laptop Checkbox Selected")
+                break   
+        print("\nOpening Page 2")
+        pagination_links = pagination.locator("li a")
+        pagination_links.nth(1).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+        print("Rows on Page 2 :", rows.count())
+
+        print("\nPage 2 Data")
+        for i in range(rows.count()):
+            print(rows.nth(i).inner_text())
+
+        print("\nOpening Page 3")
+        pagination_links = pagination.locator("li a")
+        pagination_links.nth(2).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+        print("Rows on Page 3 :", rows.count())
+
+        print("\nPage 3 Data")
+        for i in range(rows.count()):
+            print(rows.nth(i).inner_text())
+
+        print("\nOpening Page 4")
+        pagination_links = pagination.locator("li a")
+        pagination_links.nth(3).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+        print("Rows on Page 4 :", rows.count())
+
+        print("\nPage 4 Data")
+        for i in range(rows.count()):
+            print(rows.nth(i).inner_text())
+
+        print("\nSelecting First Product from Page 3")
+
+        pagination.locator("li a").nth(2).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+
+        row = rows.first
+        product = row.locator("td").nth(1).inner_text()
+
+        print("Page 3 Product :", product)
+
+        row.locator("td").nth(3).locator("input").check()
+
+        print(product, "Selected from Page 3")    
+
+        print("\nSelecting First Product from Page 4")
+
+        pagination.locator("li a").nth(3).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+
+        row = rows.first
+        product = row.locator("td").nth(1).inner_text()
+
+        print("Page 4 Product :", product)
+
+        row.locator("td").nth(3).locator("input").check()
+
+        print(product, "Selected from Page 4")
+
+        pagination.locator("li a").nth(2).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+
+        product_name = "Tablet"
+
+        row = rows.filter(has_text=product_name).first
+
+        if row.count() > 0:
+            row.locator("td").nth(3).locator("input").check()
+            print(product_name, "Selected from Page 3")
+        else:
+            print(product_name, "Not Found on Page 3")
+
+        pagination.locator("li a").nth(3).click()
+        page.wait_for_timeout(500)
+
+        rows = table.locator("tbody tr")
+
+        product_name = "Smartphone"
+
+        row = rows.filter(has_text=product_name).first
+
+        if row.count() > 0:
+            row.locator("td").nth(3).locator("input").check()
+            print(product_name, "Selected from Page 4")
+        else:
+            print(product_name, "Not Found on Page 4")         
         
