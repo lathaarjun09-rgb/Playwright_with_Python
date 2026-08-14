@@ -1,0 +1,4 @@
+# Test input 1
+username: test_user
+email: test_user@example.com
+notes: Sample user record for automated tests.

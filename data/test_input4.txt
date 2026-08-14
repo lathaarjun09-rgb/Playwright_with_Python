@@ -1,0 +1,7 @@
+# Test input 2
+search_terms:
+- apple
+- banana
+- cherry
+count: 3
+notes: Sample list data for parameterized tests.
