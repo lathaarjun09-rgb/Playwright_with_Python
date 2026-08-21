@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright,expect
 from pathlib import *
+import pyautogui
 
 
 def test_static_web_table():
@@ -57,14 +58,17 @@ def test_static_web_table():
         
         # New Tab: <button onclick="myFunction()">New Tab</button>
         print("----------------New Tab----------------")
-        
+        #Expecting new tab. We are capturing that in page.expect_popup() and storing it in new_tab variable. Then we are performing the actions on that new tab.
         with page.expect_popup() as popup_info:
             page.get_by_role("button", name = "New Tab").click()
-            
+        #get the newly opened tab    
         new_tab = popup_info.value
         new_tab.wait_for_load_state()
+        #Printing the new tab URL
         print("New tab Url", new_tab.url)
+        
         new_tab.wait_for_timeout(1000)
+        #Selecting the element in the new tab
         new_tab.locator("//a[text()='TypeScript For Playwright & Cypress']").click()
         new_tab.wait_for_timeout(3000)
         print(new_tab)        
@@ -78,6 +82,8 @@ def test_static_web_table():
         popup.wait_for_load_state()
         print("Popup URL:", popup.url)
         popup.close()
+        
+       
         
         
         
