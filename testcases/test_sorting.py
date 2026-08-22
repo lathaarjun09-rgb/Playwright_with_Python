@@ -1,3 +1,5 @@
+"""Verify that the sample sorted list is ordered and the unsorted list is not."""
+
 from playwright.sync_api import sync_playwright
 
 

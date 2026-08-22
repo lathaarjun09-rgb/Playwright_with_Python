@@ -3,6 +3,7 @@ from utilities.data_writer import write_json
 
 
 def test_register(page,register_data):
+    """Fill the registration form with fixture data and assert the completion message."""
     register = RegisterPage(page) # Creating the Object to use the page functions
 
     register.open_register_page() # It will click on the register link

@@ -3,6 +3,7 @@ from pathlib import *
 
 
 def test_static_web_table():
+    """Upload a file through the sample control and inspect the upload result."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless = False)
         page = browser.new_page()

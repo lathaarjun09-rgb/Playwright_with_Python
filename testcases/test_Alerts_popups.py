@@ -4,6 +4,7 @@ import pyautogui
 
 
 def test_static_web_table():
+    """Demonstrate JavaScript dialogs, popup windows, and browser-page event handling."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless = False)
         page = browser.new_page()

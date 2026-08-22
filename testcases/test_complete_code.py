@@ -3,6 +3,7 @@ from pathlib import *
 
 
 def test_static_web_table():
+    """Demonstrate drag-and-drop, custom dropdown selection, and slider verification."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless = False)
         page = browser.new_page()
@@ -25,26 +26,17 @@ def test_static_web_table():
         
         print("----------------Working with Slider-----------------------")
         
-        slider = page.locator("#slider-range")
-        
+        slider = page.locator("#slider-range")        
         handles = slider.locator(".ui-slider-handle")
-        print("Number of handles: ", handles.count())
-        
-        # Handling the First one
-        
-        first_handle = handles.nth(0)
-        
-        print("Identified the first handle")
-        
-        print(first_handle.bounding_box())
-        
-        #Move the first handle
-        
+        print("Number of handles: ", handles.count())        
+        # Handling the First one        
+        first_handle = handles.nth(0)        
+        print("Identified the first handle")        
+        print(first_handle.bounding_box())        
+        #Move the first handle        
         first_handle.hover()
-        page.mouse.down()
-        
-        page.mouse.move(first_handle.bounding_box()["x"]+75,first_handle.bounding_box()["y"]+20)
-        
+        page.mouse.down()        
+        page.mouse.move(first_handle.bounding_box()["x"]+75,first_handle.bounding_box()["y"]+20)        
         page.wait_for_timeout(1000)
         
         print("--------------- Scrolling Dropdown--------------------")
@@ -74,3 +66,52 @@ def test_static_web_table():
         print(combo_box)
         print("Selected the item")
         
+        print("\n----- SLIDER -----")
+
+        slider = page.locator("#slider-range")
+        handles = slider.locator(".ui-slider-handle")
+        print("Number of handles:", handles.count())
+        first_handle = handles.nth(0)
+        print("First handle identified")
+        # Get handle position
+        box = first_handle.bounding_box()
+        print("Initial position:", box)
+        # Move the slider using FOR LOOP
+        for i in range(1, 6):
+            print("Moving slider:", i)
+            box = first_handle.bounding_box()
+            page.mouse.move(box["x"] + 20,box["y"] + box["height"] / 2)
+            page.wait_for_timeout(500)
+        print("Slider movement completed")
+        #Working with slider using loop
+        print("---------------- Working with Slider -----------------------")
+
+        slider = page.locator("#slider-range")
+        handles = slider.locator(".ui-slider-handle")
+        first_handle = handles.nth(0)
+        print("Number of handles:", handles.count())
+
+        for i in range(1, 6):
+            print(f"\nSlider Step {i}")
+            box = first_handle.bounding_box()
+            print("Before X:", box["x"])
+            page.mouse.move(box["x"] + box["width"] / 2,box["y"] + box["height"] / 2)
+            page.mouse.down()
+            page.mouse.move(box["x"] + 25,box["y"] + box["height"] / 2,steps=25)
+            page.mouse.up()
+            page.wait_for_timeout(1000)
+            new_box = first_handle.bounding_box()
+            print("After X:", new_box["x"])
+        print("\nSlider movement completed")
+        
+        print("---------------- Working with Slider ----------------")
+        slider = page.locator("#slider-range")
+        # Set first handle to 150
+        page.evaluate("""() => {$("#slider-range").slider("values", 0, 150);}""")
+        page.wait_for_timeout(1000)
+        # Read displayed value
+        amount = page.locator("#amount")
+        print("Displayed value:", amount.input_value())
+        # Verify exact value
+        expect(amount).to_have_value("₹150 - ₹300")
+        print("PASS: First slider value is exactly 150")

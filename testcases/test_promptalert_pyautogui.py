@@ -7,6 +7,7 @@ import time
 
 
 def test_static_web_table():
+    """Handle the prompt-alert demonstration and verify the resulting page interaction."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless = False)
         page = browser.new_page()

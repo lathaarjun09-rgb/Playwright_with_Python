@@ -3,6 +3,7 @@ from Pages_reusable.home_page import homepage
 
 
 def test_login(page, login_data):
+    """Use the login fixture and page object, then demonstrate a search-field interaction."""
     login = LoginPage(page)
     home = homepage(page)
 

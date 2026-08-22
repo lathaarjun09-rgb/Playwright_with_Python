@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 
 def test_hidden_dropdown():
+    """Demonstrate Playwright interaction with the OrangeHRM hidden dropdown."""
 
     with sync_playwright() as p:
 

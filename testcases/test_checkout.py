@@ -5,6 +5,7 @@ from Pages_reusable.login_page import LoginPage
 
 
 def test_checkout_process(page, login_data):
+    """Log in with fixture data and execute the page-object checkout process."""
     login_page = LoginPage(page)
     login_page.login(login_data["email"], login_data["password"])
 

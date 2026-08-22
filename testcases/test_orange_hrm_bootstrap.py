@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 
 def test_hidden_dropdown():
+    """Demonstrate selecting an option from the OrangeHRM Bootstrap dropdown."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()

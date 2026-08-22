@@ -2,6 +2,7 @@ from playwright.sync_api import sync_playwright
 
 
 def test_static_web_table():
+    """Inspect paginated table rows and demonstrate navigation across table pages."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless = False)
         page = browser.new_page()
