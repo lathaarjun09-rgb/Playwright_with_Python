@@ -4,6 +4,9 @@ from Locators.login_locators import LoginLocators
 class LoginPage:
     def __init__(self, page):
         self.page = page
+        
+    def take_screenshot(self):
+        self.page.screenshot(path = "screenshots/lofinpage.png",full_page=True)    
 
     def open_login_page(self):
         self.page.locator(LoginLocators.LOGIN_LINK).click()

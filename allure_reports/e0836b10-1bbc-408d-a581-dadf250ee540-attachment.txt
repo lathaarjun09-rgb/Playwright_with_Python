@@ -1,0 +1,4 @@
+-----------Drag the content and drop---------------
+Screenshot saved: e:\Demowebshop_PWP\Playwright_with_Python\screenshots\01_Pagess.png
+Screenshot saved: e:\Demowebshop_PWP\Playwright_with_Python\screenshots\02_Pagess.png
+Video saved: e:\Demowebshop_PWP\Playwright_with_Python\videos\page@6ea3b1a3b6cb65c769277f66a6b81d72.webm
