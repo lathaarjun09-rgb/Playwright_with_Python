@@ -19,7 +19,7 @@ def page(request):
     VIDEOS.mkdir(parents=True, exist_ok=True)
     TRACES.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
-        browser = p.chromium.launch(args=["--start-maximized"])
+        browser = p.chromium.launch(headless=False,args=["--start-maximized"])
         context = browser.new_context(
             no_viewport=True,
             record_video_dir=str(VIDEOS),
