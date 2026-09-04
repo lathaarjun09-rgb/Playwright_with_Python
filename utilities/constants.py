@@ -1,6 +1,7 @@
 BASE_URL = "https://testautomationpractice.blogspot.com/"
 
-base_url = "https://parabank.parasoft.com/parabank/api-docs/index.html"
+base_url = "https://parabank.parasoft.com/parabank"
+
 
 # BASE_URL1 = "https://testautomationpractice.blogspot.com/"
 
