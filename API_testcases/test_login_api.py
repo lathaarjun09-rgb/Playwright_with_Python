@@ -19,3 +19,14 @@ def test_valid_login(api_client):
     print("RESPONSE:", response.text)
 
     assert response.status_code == 200
+    
+def test_invalid_login(api_client):
+    response = api_client.post( 
+        "/login.htm", 
+        data={ "username": "invalid_user", 
+              "password": Config.PARABANK_PASSWORD } ) 
+        print("STATUS:", response.status_code) 
+        print("URL:", response.url) 
+        print("RESPONSE:", response.text) 
+        assert response.status_code == 200 
+        assert "The username and password could not be verified." in response.text
