@@ -16,6 +16,9 @@ def run(playwright: Playwright) -> None:
     expect(page.get_by_role("heading", name="Customer Login")).to_be_visible()
     page.get_by_role("button", name="Log In").click()
     expect(page.get_by_role("button")).to_contain_text("Log In")
+    
+    
+    
 
     # ---------------------
     context.close()

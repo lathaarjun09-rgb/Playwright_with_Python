@@ -4,6 +4,8 @@ from playwright.sync_api import sync_playwright
 from utilities.constants import BASE_URL
 from utilities.data_reader import load_json
 from pathlib import Path
+from API_files.api_client import APIClient
+from utilities.config_reader import Config
 
 
 ROOT = Path(__file__).parent
@@ -73,5 +75,11 @@ def screenshot(page):
         return screenshot_path
 
     return take_screenshot
+
+@pytest.fixture
+def api_client():
+    
+    return APIClient(Config.PARABANK_API_BASE_URL)
+
 
 

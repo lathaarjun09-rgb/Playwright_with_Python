@@ -84,6 +84,8 @@ def test_static_web_table():
         print("Popup URL:", popup.url)
         popup.close()
         
+        #https://parabank.parasoft.com/parabank/services/bank
+        
        
         
         

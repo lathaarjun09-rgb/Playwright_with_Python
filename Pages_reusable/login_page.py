@@ -11,10 +11,6 @@ class LoginPage:
     def open_login_page(self):
         self.page.locator(LoginLocators.LOGIN_LINK).click()
 
-    class LoginPage:
-    def __init__(self, page):
-        self.page = page
-
     def login(self, email, password):
         self.page.goto(f"{BASE_URL}/login")
         self.page.locator("#Email").fill(email)
